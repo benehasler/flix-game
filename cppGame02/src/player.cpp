@@ -90,7 +90,7 @@ void Player::movement(const std::vector<std::vector<Block>>& map) {
         bool isFreeFoot = isValid(newX, newYFoot) && !map[newX][newYFoot].isSolid;
 
         if (isFreeHead && isFreeFoot) position.x += moveDirection * speed;
-        else if (isFreeHead) {
+        else if (isFreeHead && isGrounded) {
             //Logic for going up small blocks
             for (int i = 1; i <= checkUpHeight; i++) {
                 int checkUpY = newYFoot - i;

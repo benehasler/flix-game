@@ -12,7 +12,7 @@ int main() {
     SetConfigFlags(FLAG_WINDOW_RESIZABLE);
     InitWindow(screenSize.x,screenSize.y, "My Game02");
     MaximizeWindow();
-    SetTargetFPS(420);
+    SetTargetFPS(1420);
     ChangeDirectory(GetApplicationDirectory());
 
     GameCamera gameCam;
