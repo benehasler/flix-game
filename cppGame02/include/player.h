@@ -13,6 +13,7 @@ class Player {
     void animate(Vector2 renderPos);
     void movement(const std::vector<std::vector<Block>>& map);
     void handleInput();
+    void triggerHit();
 
     int getFrameWidth() const { return frameWidth; }
     Vector2 getPos() const { return position; }
@@ -36,6 +37,8 @@ class Player {
     int moveDirection;
     Vector2 oldPosition;
     int checkUpHeight;
+    bool gotHit;
+    float hitTimer;
 };
 
 #endif

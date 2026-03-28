@@ -39,7 +39,7 @@ int main() {
         while (accumulator >= dt) {
             player.movement(map);
             level1.updateEnemies();
-            if (level1.checkCollisionWithPlayer(player.getHitbox())) throw std::runtime_error("Touched an enemy!");
+            if (level1.checkCollisionWithPlayer(player.getHitbox())) player.triggerHit();
             accumulator -= dt;
         }
 

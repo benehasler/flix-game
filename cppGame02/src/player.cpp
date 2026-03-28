@@ -26,6 +26,8 @@ Player::Player() {
     jumpRequest = false;
     moveDirection = IDLE;
     checkUpHeight = 10;
+    gotHit = false;
+    hitTimer = 0.0f;
 }
 
 Player::~Player() { UnloadTexture(spriteSheet); }
@@ -51,7 +53,16 @@ void Player::animate(Vector2 renderPos) {
     source.x = (float)currentFrame * frameWidth;
 
     Rectangle dest = {renderPos.x, renderPos.y, frameWidth, (float)spriteSheet.height};
-    DrawTexturePro(spriteSheet, source, dest, {0, 0}, 0.0f, WHITE);
+
+    if (gotHit) {
+        if ((int)(GetTime() * 6) % 2 == 0) {
+            DrawTexturePro(spriteSheet, source, dest, {0, 0}, 0.0f, RED);
+        } else {
+            DrawTexturePro(spriteSheet, source, dest, {0, 0}, 0.0f, WHITE);
+        }
+    } else {
+        DrawTexturePro(spriteSheet, source, dest, {0, 0}, 0.0f, WHITE);
+    }
 
     if (IsKeyPressed(KEY_F3)) {
         showDebug = !showDebug;
@@ -66,6 +77,14 @@ void Player::movement(const std::vector<std::vector<Block>>& map) {
     oldPosition = position;
     float speed = 1.75f;
     isMoving = false;
+
+    if (gotHit) {
+        hitTimer -= GetFrameTime();
+        if (hitTimer <= 0) {
+            gotHit = false;
+            hitTimer = 0;
+        }
+    }
 
     auto isValid = [&](int x, int y) {
         if (x < 0 || x >= map.size()) return false;
@@ -177,4 +196,11 @@ void Player::handleInput() {
     moveDirection = 0;
     if (IsKeyDown(KEY_A) || IsKeyDown(KEY_LEFT)) moveDirection = LEFT;
     if (IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT)) moveDirection = RIGHT;
+}
+
+void Player::triggerHit() {
+    if (!gotHit) {
+        gotHit = true;
+        hitTimer = 0.3f;
+    }
 }
