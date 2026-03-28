@@ -120,6 +120,10 @@ void Player::movement(const std::vector<std::vector<Block>>& map) {
         jumpRequest = false;
     }
 
+    if (!isGrounded && velocity < 0 && !IsKeyDown(KEY_SPACE)) {
+        velocity *= 0.5f;
+    }
+
     if (velocity > 0) {
         velocity += 0.25f; //falling
     } 
