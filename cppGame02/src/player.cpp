@@ -28,6 +28,7 @@ Player::Player() {
     checkUpHeight = 10;
     gotHit = false;
     hitTimer = 0.0f;
+    hp = 3;
 }
 
 Player::~Player() { UnloadTexture(spriteSheet); }
@@ -200,6 +201,7 @@ void Player::handleInput() {
 
 void Player::triggerHit() {
     if (!gotHit) {
+        hp -= 1;
         gotHit = true;
         hitTimer = 0.3f;
     }

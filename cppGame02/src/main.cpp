@@ -5,6 +5,7 @@
 #include <stdexcept>
 #include "levels.h"
 #include "raymath.h"
+#include "userInterface.h"
 
 int main() {
     Vector2 screenSize = { 600, 400 };
@@ -16,6 +17,7 @@ int main() {
     ChangeDirectory(GetApplicationDirectory());
 
     GameCamera gameCam;
+    UserInterface userInterface;
     Player player;
     Level1 level1;
     level1.initLevel();
@@ -39,7 +41,13 @@ int main() {
         while (accumulator >= dt) {
             player.movement(map);
             level1.updateEnemies();
-            if (level1.checkCollisionWithPlayer(player.getHitbox())) player.triggerHit();
+            if (level1.checkCollisionWithPlayer(player.getHitbox())) {
+                
+                if (!player.getGotHit()) {
+                    gameCam.screenShake(8.0f);
+                }
+                player.triggerHit();
+            }
             accumulator -= dt;
         }
 
@@ -57,7 +65,8 @@ int main() {
                 level1.draw(alpha, gameCam.getRaylibCam());
                 player.animate(renderPos);
             EndMode2D();
-            DrawFPS(10, 10);
+            userInterface.draw(player.getHp());
+            DrawFPS(1800, 10);
         EndDrawing();
     }
     CloseWindow();

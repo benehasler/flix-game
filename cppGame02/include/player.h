@@ -19,6 +19,8 @@ class Player {
     Vector2 getPos() const { return position; }
     Vector2 getOldPos() const { return oldPosition; }
     Rectangle getHitbox() const { return { position.x, position.y, playerSize.x, playerSize.y }; }
+    int getHp() const { return hp; }
+    bool getGotHit() const { return gotHit; }
 
     private:
     Texture2D spriteSheet;
@@ -39,6 +41,7 @@ class Player {
     int checkUpHeight;
     bool gotHit;
     float hitTimer;
+    int hp;
 };
 
 #endif
