@@ -45,12 +45,9 @@ CMakeCache.txt
 CMakeFiles/
 cmake_install.cmake
 
-# Ausführbare Dateien (Windows & Linux)
-*.exe
-*.out
-*.app
-
 # VS Code spezifisch
 .vscode/
 tempCodeRunnerFile.cpp
 .cache
+
+cppGame01/
