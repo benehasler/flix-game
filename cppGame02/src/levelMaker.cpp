@@ -35,6 +35,3 @@ void LevelMaker::addPlatform(int posX, int posY, int width, int height, Block re
     }
 }
 
-void LevelMaker::addEnemy() {
-    
-}
