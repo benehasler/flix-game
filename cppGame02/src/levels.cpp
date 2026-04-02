@@ -23,6 +23,7 @@ Level1::Level1() {
     SetTextureFilter(backgroundSprite, TEXTURE_FILTER_POINT);
     if (backgroundSprite.id == 0 || backgroundSprite.height == 0 || backgroundSprite.width == 0) {
         TraceLog(LOG_ERROR, "Failed to load background png.");
+        exit(1);
     }
 
 
