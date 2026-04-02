@@ -142,7 +142,7 @@ void Player::movement(const std::vector<std::vector<Block>>& map) {
         jumpRequest = false;
     }
 
-    if (!isGrounded && velocity < 0 && (!IsKeyDown(KEY_UP) || !IsKeyDown(KEY_W))) {
+    if (!isGrounded && velocity < 0 && (!IsKeyDown(KEY_UP) && !IsKeyDown(KEY_W) && !IsKeyDown(KEY_SPACE))) {
         velocity *= 0.5f;
     }
 
@@ -192,7 +192,7 @@ void Player::movement(const std::vector<std::vector<Block>>& map) {
 }
 
 void Player::handleInput() {
-    if ((IsKeyPressed(KEY_UP) || IsKeyPressed(KEY_W)) && isGrounded) {
+    if ((IsKeyPressed(KEY_UP) || IsKeyPressed(KEY_W) || IsKeyPressed(KEY_SPACE)) && isGrounded) {
         jumpRequest = true;
     }
 
