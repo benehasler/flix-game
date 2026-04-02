@@ -21,9 +21,10 @@ Level1::Level1() {
     levelSize = { 2000, 450 };
     backgroundSprite = LoadTexture("../assets/light_stone_block.png");
     SetTextureFilter(backgroundSprite, TEXTURE_FILTER_POINT);
-    if (backgroundSprite.id == 0) {
+    if (backgroundSprite.id == 0 || backgroundSprite.height == 0 || backgroundSprite.width == 0) {
         TraceLog(LOG_ERROR, "Failed to load background png.");
     }
+
 
     while ((int)levelSize.x % backgroundSprite.height != 0) {
         levelSize.x += 1;
